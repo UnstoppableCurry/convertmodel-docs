@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Docs / Claude Code 直连</title>
+    <link rel="stylesheet" href="/docs-assets/docs-modern.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <header class="top">
+        <div class="brand">
+          <strong>convertmodel docs</strong>
+          <span>claude code direct path</span>
+        </div>
+        <nav class="nav">
+          <a href="/docs/">Docs</a>
+          <a class="active" href="/docs/claude-code/">Claude Code</a>
+          <a href="/docs/agents/">Agents</a>
+          <a href="/docs/claude-code-vs-codex/">Claude Code vs Codex</a>
+          <a href="/docs/codeplan-compatible-cc/">CodePlan + CC</a>
+          <a href="/docs/codex-compatible-cc/">Codex + CC</a>
+          <a href="/docs/cc-switch/">CC-Switch</a>
+          <a href="/docs/reference/">Reference</a>
+        </nav>
+      </header>
+
+      <section class="panel">
+        <div class="kicker">Path 01</div>
+        <h1>Claude Code 直连</h1>
+        <p class="sub">最短可用路径。先完成安装和最小配置，再做模型切换与排错。</p>
+
+        <h2>安装</h2>
+        <ol>
+          <li>安装 Node.js 18+。</li>
+          <li>执行 <code>npm install -g @anthropic-ai/claude-code</code>。</li>
+          <li>初始化后确认 <code>~/.claude</code> 配置目录已创建。</li>
+        </ol>
+
+        <h2>最小配置</h2>
+        <pre>{
+  "env": {
+    "ANTHROPIC_AUTH_TOKEN": "YOUR_API_KEY",
+    "ANTHROPIC_BASE_URL": "https://convertmodel.net/anthropic",
+    "ANTHROPIC_MODEL": "claude-sonnet-4-6"
+  }
+}</pre>
+
+        <h2>路径速查</h2>
+        <div class="split">
+          <section class="box">
+            <h3>macOS / Linux</h3>
+            <p><code>~/.claude/settings.json</code></p>
+          </section>
+          <section class="box">
+            <h3>Windows</h3>
+            <p><code>%USERPROFILE%/.claude/settings.json</code></p>
+          </section>
+        </div>
+
+        <h2>使用建议</h2>
+        <ul>
+          <li>默认模型建议使用 <code>claude-sonnet-4-6</code>。</li>
+          <li>高强度任务再切到 Opus 档位。</li>
+          <li>如果出现 503，先检查分组 key 与模型名是否匹配。</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

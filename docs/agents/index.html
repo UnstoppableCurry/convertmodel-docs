@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Docs / Agents 与并行</title>
+    <link rel="stylesheet" href="/docs-assets/docs-modern.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <header class="top">
+        <div class="brand">
+          <strong>convertmodel docs</strong>
+          <span>agents, parallelism, worktrees</span>
+        </div>
+        <nav class="nav">
+          <a href="/docs/">Docs</a>
+          <a href="/docs/claude-code/">Claude Code</a>
+          <a class="active" href="/docs/agents/">Agents</a>
+          <a href="/docs/claude-code-vs-codex/">Claude Code vs Codex</a>
+          <a href="/docs/codeplan-compatible-cc/">CodePlan + CC</a>
+          <a href="/docs/codex-compatible-cc/">Codex + CC</a>
+          <a href="/docs/cc-switch/">CC-Switch</a>
+          <a href="/docs/reference/">Reference</a>
+        </nav>
+      </header>
+
+      <section class="panel">
+        <div class="kicker">Official Workflow Guide</div>
+        <h1>Agents、任务并行、worktree 到底是什么</h1>
+        <p class="sub">
+          先讲结论：请求兼容和多 agent 并行不是一回事。网关可以兼容协议，但真正的多 agent 隔离，最终依赖客户端本地环境。
+        </p>
+
+        <h2>先讲人话</h2>
+        <div class="split">
+          <section class="box">
+            <h3>单线程任务</h3>
+            <p>一个主会话自己连续处理多个步骤。最稳，最少踩坑，适合大多数普通使用。</p>
+          </section>
+          <section class="box">
+            <h3>任务并行</h3>
+            <p>一个主会话把多个独立问题同时推进，但仍然以同一个主上下文为中心。</p>
+          </section>
+          <section class="box">
+            <h3>多 agent 并行</h3>
+            <p>多个独立代理分头做事，再由主代理汇总。隔离更强，但对本地环境要求也更高。</p>
+          </section>
+          <section class="box">
+            <h3>Git worktree</h3>
+            <p>给每个并行代理一个独立工作目录，避免互相覆盖文件。Claude Code 官方就是用它来做隔离。</p>
+          </section>
+        </div>
+
+        <h2>为什么会报 worktree 错</h2>
+        <p>
+          因为真正尝试创建并行 agent 的，是本地客户端，不是服务端网关。只要客户端决定要起子代理，它就可能需要本地 Git worktree。
+        </p>
+        <ul>
+          <li>如果项目不是有效 Git 仓库，可能报错。</li>
+          <li>如果仓库还没有首个 commit，可能报错。</li>
+          <li>如果客户端没有可用的 worktree/hook 配置，可能报错。</li>
+        </ul>
+
+        <h2>什么时候该用哪种模式</h2>
+        <ol>
+          <li>只是问配置、看日志、改一两个文件：优先单线程。</li>
+          <li>前后端、文档、测试是相互独立的问题：适合并行任务。</li>
+          <li>多个子任务互不影响，而且你明确需要隔离上下文：再考虑多 agent。</li>
+        </ol>
+
+        <h2>最佳实践</h2>
+        <ul>
+          <li>先用单线程把最小链路跑通，再测试并行。</li>
+          <li>并行前先确认仓库已有 commit，`git worktree` 能正常工作。</li>
+          <li>不要把“网关可用”和“多 agent 一定可用”混为一谈。</li>
+          <li>如果用户是普通 C 端，优先保证单线程稳定，再单独说明多 agent 前置条件。</li>
+        </ul>
+
+        <h2>术语提醒</h2>
+        <p>
+          社区里经常会说 “agent team” 或 “swarm”。Claude Code 官方更常见的叫法是 <code>subagents</code>、<code>common workflows</code> 和 <code>git worktrees</code>。看到不同叫法时，先把它理解成“是否真的起了独立代理、是否真的需要本地隔离工作目录”。
+        </p>
+
+        <h2>官方来源</h2>
+        <ul>
+          <li><a href="https://docs.anthropic.com/en/docs/claude-code/sub-agents">Anthropic / Claude Code / Subagents</a></li>
+          <li><a href="https://docs.anthropic.com/en/docs/claude-code/common-workflows">Anthropic / Claude Code / Common workflows</a></li>
+          <li><a href="https://developers.openai.com/codex/concepts/subagents">OpenAI / Codex / Subagents</a></li>
+          <li><a href="https://developers.openai.com/codex/app/worktrees">OpenAI / Codex app / Worktrees</a></li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Docs / CodePlan 兼容 CC</title>
+    <link rel="stylesheet" href="/docs-assets/docs-modern.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <header class="top">
+        <div class="brand">
+          <strong>convertmodel docs</strong>
+          <span>codeplan compatible with cc</span>
+        </div>
+        <nav class="nav">
+          <a href="/docs/">Docs</a>
+          <a href="/docs/claude-code/">Claude Code</a>
+          <a href="/docs/agents/">Agents</a>
+          <a href="/docs/claude-code-vs-codex/">Claude Code vs Codex</a>
+          <a class="active" href="/docs/codeplan-compatible-cc/">CodePlan + CC</a>
+          <a href="/docs/codex-compatible-cc/">Codex + CC</a>
+          <a href="/docs/cc-switch/">CC-Switch</a>
+          <a href="/docs/reference/">Reference</a>
+        </nav>
+      </header>
+
+      <section class="panel">
+        <div class="kicker">Path 02</div>
+        <h1>CodePlan 兼容 Claude Code</h1>
+        <p class="sub">
+          这是 Claude Code 客户端 + Anthropic 兼容接口 + 网关模型映射的组合路径。客户端配置方式与直连一致，差异在上游映射与调度。
+        </p>
+
+        <h2>配置示例</h2>
+        <pre>{
+  "env": {
+    "ANTHROPIC_AUTH_TOKEN": "YOUR_API_KEY",
+    "ANTHROPIC_BASE_URL": "https://convertmodel.net/anthropic",
+    "ANTHROPIC_MODEL": "claude-sonnet-4-6"
+  }
+}</pre>
+
+        <h2>当前映射</h2>
+        <div class="split">
+          <section class="box">
+            <h3>Sonnet</h3>
+            <p><code>claude-sonnet-4-6 -> kimi-k2.5</code></p>
+          </section>
+          <section class="box">
+            <h3>Opus</h3>
+            <p><code>claude-opus-4-6 -> glm-5</code></p>
+          </section>
+        </div>
+
+        <h2>关键注意事项</h2>
+        <ul>
+          <li>优先使用 Anthropic 分组 key，不要混用 OpenAI 分组 key。</li>
+          <li>请求路径是 <code>/v1/messages</code>。</li>
+          <li>若调度前失败，使用记录可能没有落库，需要查看网关日志。</li>
+          <li><code>503 No available accounts</code> 常见于模型名、分组或账号过滤不匹配。</li>
+        </ul>
+
+        <p class="note">排错顺序：先看请求模型名，再看上游映射，再看账号过滤与可用容量。</p>
+      </section>
+    </main>
+  </body>
+</html>

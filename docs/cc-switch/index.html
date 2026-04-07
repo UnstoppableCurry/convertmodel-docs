@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Docs / CC-Switch</title>
+    <link rel="stylesheet" href="/docs-assets/docs-modern.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <header class="top">
+        <div class="brand">
+          <strong>convertmodel docs</strong>
+          <span>tooling: cc-switch</span>
+        </div>
+        <nav class="nav">
+          <a href="/docs/">Docs</a>
+          <a href="/docs/claude-code/">Claude Code</a>
+          <a href="/docs/agents/">Agents</a>
+          <a href="/docs/claude-code-vs-codex/">Claude Code vs Codex</a>
+          <a href="/docs/codeplan-compatible-cc/">CodePlan + CC</a>
+          <a href="/docs/codex-compatible-cc/">Codex + CC</a>
+          <a class="active" href="/docs/cc-switch/">CC-Switch</a>
+          <a href="/docs/reference/">Reference</a>
+        </nav>
+      </header>
+
+      <section class="panel">
+        <div class="kicker">Tool Page</div>
+        <h1>CC-Switch 配置与切换</h1>
+        <p class="sub">
+          推荐作为“工具页”使用，而不是主流程入口。它适合桌面端可视化管理多套配置、多供应商和多客户端。
+        </p>
+
+        <h2>推荐场景</h2>
+        <ul>
+          <li>同一台机器上维护多套 API key。</li>
+          <li>在 Claude Code 与 Codex 间切换工作流。</li>
+          <li>区分工作环境、实验环境和备用环境。</li>
+        </ul>
+
+        <h2>Claude Code 配置模板</h2>
+        <pre>{
+  "env": {
+    "ANTHROPIC_AUTH_TOKEN": "YOUR_API_KEY",
+    "ANTHROPIC_BASE_URL": "https://convertmodel.net/anthropic",
+    "ANTHROPIC_MODEL": "claude-sonnet-4-6"
+  }
+}</pre>
+
+        <h2>Codex 配置模板</h2>
+        <pre>auth.json
+{
+  "OPENAI_API_KEY": "YOUR_API_KEY"
+}
+
+config.toml
+model_provider = "convertmodel"
+model = "gpt-5.4"
+
+[model_providers.convertmodel]
+name = "convertmodel"
+base_url = "https://convertmodel.net"
+wire_api = "responses"
+requires_openai_auth = true</pre>
+
+        <p class="note">边界：CC-Switch 更适合桌面系统。无 GUI 的纯服务器环境建议直接管理配置文件。</p>
+      </section>
+    </main>
+  </body>
+</html>

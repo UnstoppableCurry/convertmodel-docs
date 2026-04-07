@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Docs / Codex 兼容 CC</title>
+    <link rel="stylesheet" href="/docs-assets/docs-modern.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <header class="top">
+        <div class="brand">
+          <strong>convertmodel docs</strong>
+          <span>codex compatible with cc gateway</span>
+        </div>
+        <nav class="nav">
+          <a href="/docs/">Docs</a>
+          <a href="/docs/claude-code/">Claude Code</a>
+          <a href="/docs/agents/">Agents</a>
+          <a href="/docs/claude-code-vs-codex/">Claude Code vs Codex</a>
+          <a href="/docs/codeplan-compatible-cc/">CodePlan + CC</a>
+          <a class="active" href="/docs/codex-compatible-cc/">Codex + CC</a>
+          <a href="/docs/cc-switch/">CC-Switch</a>
+          <a href="/docs/reference/">Reference</a>
+        </nav>
+      </header>
+
+      <section class="panel">
+        <div class="kicker">Path 03</div>
+        <h1>Codex 兼容 CC 网关</h1>
+        <p class="sub">保留 Codex CLI 使用习惯，只替换到统一网关。文档示例采用中立官方 CLI 配置，不使用品牌定制命令。</p>
+
+        <h2>安装</h2>
+        <ol>
+          <li>安装 Node.js 18+。</li>
+          <li>执行 <code>npm install -g @openai/codex@latest</code>。</li>
+          <li>写入 <code>auth.json</code> 与 <code>config.toml</code>。</li>
+        </ol>
+
+        <h2><code>auth.json</code></h2>
+        <pre>{
+  "OPENAI_API_KEY": "YOUR_API_KEY"
+}</pre>
+
+        <h2><code>config.toml</code></h2>
+        <pre>model_provider = "convertmodel"
+model = "gpt-5.4"
+model_reasoning_effort = "low"
+
+[model_providers.convertmodel]
+name = "convertmodel"
+base_url = "https://convertmodel.net"
+wire_api = "responses"
+requires_openai_auth = true</pre>
+
+        <h2>适用边界</h2>
+        <ul>
+          <li>Codex 与 Claude Code 是不同客户端链路，配置文件也不同。</li>
+          <li>如果目标是稳定 Claude 风格编码体验，优先使用 Claude Code 直连。</li>
+          <li>如果你已有 Codex 工作流，可用本页方式接入同一网关。</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Docs / Reference</title>
+    <link rel="stylesheet" href="/docs-assets/docs-modern.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <header class="top">
+        <div class="brand">
+          <strong>convertmodel docs</strong>
+          <span>reference and troubleshooting</span>
+        </div>
+        <nav class="nav">
+          <a href="/docs/">Docs</a>
+          <a href="/docs/claude-code/">Claude Code</a>
+          <a href="/docs/agents/">Agents</a>
+          <a href="/docs/claude-code-vs-codex/">Claude Code vs Codex</a>
+          <a href="/docs/codeplan-compatible-cc/">CodePlan + CC</a>
+          <a href="/docs/codex-compatible-cc/">Codex + CC</a>
+          <a href="/docs/cc-switch/">CC-Switch</a>
+          <a class="active" href="/docs/reference/">Reference</a>
+        </nav>
+      </header>
+
+      <section class="panel">
+        <div class="kicker">Reference</div>
+        <h1>路径、变量与排错速查</h1>
+        <p class="sub">用于快速复制与比对。出现故障时，先走最小排查路径再深入日志。</p>
+
+        <h2>配置路径</h2>
+        <div class="split">
+          <section class="box">
+            <h3>Claude Code</h3>
+            <ul>
+              <li>macOS/Linux: <code>~/.claude/settings.json</code></li>
+              <li>Windows: <code>%USERPROFILE%/.claude/settings.json</code></li>
+              <li>onboarding: <code>~/.claude.json</code></li>
+            </ul>
+          </section>
+          <section class="box">
+            <h3>Codex</h3>
+            <ul>
+              <li><code>auth.json</code></li>
+              <li><code>config.toml</code></li>
+              <li>建议与项目凭据分离管理。</li>
+            </ul>
+          </section>
+        </div>
+
+        <h2>常见错误</h2>
+        <ul>
+          <li><code>503 No available accounts</code>：先查模型名、分组 key、账号过滤。</li>
+          <li>配置无效：先查文件路径、变量名拼写、优先级覆盖。</li>
+          <li>使用记录无条目：请求可能在调度前失败，需看网关日志。</li>
+          <li>模型行为不符预期：先看客户端请求模型名，再核对映射。</li>
+        </ul>
+
+        <div class="note">
+          最小排查路径：1) 请求模型名 2) 分组与 key 3) 上游映射 4) 账号可用容量 5) 网关日志。
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

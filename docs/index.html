@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Docs / 概览</title>
+    <link rel="stylesheet" href="/docs-assets/docs-modern.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <header class="top">
+        <div class="brand">
+          <strong>convertmodel docs</strong>
+          <span>neutral operational documentation</span>
+        </div>
+        <nav class="nav">
+          <a class="active" href="/docs/">Docs</a>
+          <a href="/docs/claude-code/">Claude Code</a>
+          <a href="/docs/agents/">Agents</a>
+          <a href="/docs/claude-code-vs-codex/">Claude Code vs Codex</a>
+          <a href="/docs/codeplan-compatible-cc/">CodePlan + CC</a>
+          <a href="/docs/codex-compatible-cc/">Codex + CC</a>
+          <a href="/docs/cc-switch/">CC-Switch</a>
+          <a href="/docs/reference/">Reference</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div class="kicker">Documentation Scope</div>
+        <h1>教程与套餐、品牌介绍分离</h1>
+        <p class="sub">
+          本文档只负责接入配置、兼容说明和排错，不包含营销叙事、价格策略、社群导流或站长口吻内容。
+          如果你只想快速上手，优先看 Claude Code 直连；需要兼容层时再看 CodePlan/Codex 对应章节。
+        </p>
+      </section>
+
+      <section class="grid">
+        <aside class="toc">
+          <h3>阅读顺序</h3>
+          <ul>
+            <li><a class="active" href="/docs/">1. 概览与术语</a></li>
+            <li><a href="/docs/claude-code/">2. Claude Code 直连</a></li>
+            <li><a href="/docs/agents/">3. Agents / 并行 / worktree</a></li>
+            <li><a href="/docs/claude-code-vs-codex/">4. Claude Code vs Codex</a></li>
+            <li><a href="/docs/codeplan-compatible-cc/">5. CodePlan 兼容 CC</a></li>
+            <li><a href="/docs/codex-compatible-cc/">6. Codex 兼容 CC</a></li>
+            <li><a href="/docs/cc-switch/">7. CC-Switch 工具页</a></li>
+            <li><a href="/docs/reference/">8. 速查与排错</a></li>
+          </ul>
+        </aside>
+        <article class="content">
+          <h2>术语与前提</h2>
+          <div class="split">
+            <section class="box">
+              <h3>API Key</h3>
+              <p>客户端认证凭据。Claude Code / CodePlan 兼容链路通常使用 Anthropic 分组 key。</p>
+            </section>
+            <section class="box">
+              <h3>Base URL</h3>
+              <p>客户端请求入口地址。示例：<code>https://convertmodel.net</code>。</p>
+            </section>
+            <section class="box">
+              <h3>兼容层</h3>
+              <p>客户端保持原有协议，网关负责模型映射、账号调度与上游路由。</p>
+            </section>
+            <section class="box">
+              <h3>CC-Switch</h3>
+              <p>图形化配置管理工具，适合桌面端维护多 key、多环境、多客户端配置。</p>
+            </section>
+          </div>
+          <h2>三条主线</h2>
+          <ol>
+            <li>Claude Code 直连：最短路径，最先完成。</li>
+            <li>Agents / 并行 / worktree：先理解什么是任务并行，什么是多 agent 并行。</li>
+            <li>Claude Code vs Codex：先看差异，再决定哪条客户端路径最适合你。</li>
+            <li>CodePlan 兼容 CC：当你使用 Coding Plan 上游时采用。</li>
+            <li>Codex 兼容 CC：当你使用 Codex CLI 但希望接入统一网关时采用。</li>
+          </ol>
+          <p class="note">
+            推荐阅读顺序：先完成 Claude Code 直连，再读 Agents / worktree，再看 Claude Code 与 Codex 的差异，最后按需要进入 CodePlan 或 Codex 兼容链路。CC-Switch 作为工具页阅读，不作为主流程前置条件。
+          </p>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
